@@ -179,7 +179,7 @@ latex_elements = {
 # Additional stuff for the LaTeX preamble.
 #'preamble': '',
 
-    'babel': '\\userpackage[english]{babel}',
+    'babel': '\\usepackage[english]{babel}',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
