@@ -4,17 +4,19 @@
    contain the root `toctree` directive.
 
 Welcome to network-programming-with-go-zh_cn's documentation!
-=============================================================
+################################################################
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
+   
+   rst/architecture.rst
 
 
 
 Indices and tables
-==================
+#####################
 
 * :ref:`genindex`
 * :ref:`modindex`
