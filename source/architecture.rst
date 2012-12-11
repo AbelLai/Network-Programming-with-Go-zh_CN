@@ -209,3 +209,181 @@ Gartner Classification
 Based on this threefold decomposition of applicaitons, Gartner considered how the components might be distributed in a client-server sysem. They came up with five models: 
 
 .. image:: _static/img/gartner.gif
+
+Example: Distributed Database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Gartner classification: 1
+
+.. image:: _static/img/gartner1.gif
+
+Modern mobile phones make good examples of this: due to limited memory they may store a small part of a database locally so that they can usuall respond quickly. However, if data is required that is not held locally, then a request may be made to a remote database for that additional data.
+
+Google maps forms another good example. Al of the maps reside on Google's servers. When one is requested by a user, the "nearby" maps are also downloaded into a small database in the browser. When the user moves the map a little bit, the extra bits required are already in the local store for quick response.
+
+Example: Network File Service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Gartner classification 2 allows remote clients acess to a shared file system 
+
+.. image:: _static/img/gartner2.gif
+
+There are many examples of scuh systems: NFS, Microsoft shares, DCE, etc
+
+Example: Web
+~~~~~~~~~~~~~~
+
+An example of Gartner classification 3 is the Web with Java applets. This is a distributed hypertext system, with many additional mechanisms 
+
+.. image:: _static/img/gartner3.gif
+
+Example: Terminal Emulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+An example of Gartner classification 4 is terminal emulation. This allows a remote system to act as a normal terminal on a local system. 
+
+.. image:: _static/img/gartner4.gif
+
+Telnet is the most common example of this.
+
+Example: Expect
+~~~~~~~~~~~~~~~~
+
+Expect is a novel illustration of Gartner classification 5. It acts as a wrapper around a classical system such as a command-line interface. It builds an X Window interface around this, so that the user interacts with a GUI, and the GUI in turn interacts with the command-line interface
+
+.. image:: _static/img/expect.gif
+
+Example: X Window System
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The X Window System itself is an example of Gartner classification 5. An application makes GUI calls such as DrawLine, but these are not handled directly but instead passed to an X Window server for rendering. This decouples the application view of windowing and the display view of windowing. 
+
+.. image:: _static/img/gartner5.gif
+
+Three Tier Models
+~~~~~~~~~~~~~~~~~~~
+
+of course, if you have two tiers, then you can have three, four, or more. Some of the three tier possibilities are shown in this diagram: 
+
+.. image:: _static/img/threetier.gif
+
+The modern Web is a good example of the rightmost of these. The backend is made up of a database, often running stored procedures to hold some of the database logic. The middle tier is an HTTP server such as Apache running PHP scripts (or Ruby on Rails, or JSP pages, etc). This will manage some of the logic and will have data such as HTML pages stored locally. The frontend is a browser to display the pages, under the control of some Javascript. In HTML 5, the frontend may also have a local database.
+
+Fat vs thin
+~~~~~~~~~~~~~~
+
+A common labelling of components is "fat" or "thin". Fat components take up lots of memory and do complex processing. Thin components on the other hand, do little of either. There don't seem to be any "normal" size components, only fat or thin!
+
+Fatness or thinness is a relative concept. Browsers are often laelled as thin because "all they do is diplay web pages". Firefox on my Linux box takes nearly 1/2 a gigabyte of memory, which I don't regard as small at all!
+
+Middleware model
+-----------------
+
+Middleware is teh "glue" connecting components of a distributed system. The middleware model is 
+
+.. image:: _static/img/middleware.gif
+
+Middleware
+-----------
+
+Components of middleware include
+
+- The network services include things like TCP/IP
+- The middleware layer is application-independent s/w using the network services
+- Examples of middleware are: DCE, RPC, Corba
+- Middleware may only perform one function (such as RPC) or many (such as DCE)
+
+Middleware examples
+~~~~~~~~~~~~~~~~~~~~~~
+
+Examples of middleware include
+
+- Primitive services such as terminal emulators, file transfer, email
+- Basic services such as RPC
+- Integrated services such as DCE, Network O/S
+- Distributed object services such as CORBA, OLE/ActiveX
+- Mobile object services such as RMI, Jini
+- World Wide Web
+
+Middleware functions
+~~~~~~~~~~~~~~~~~~~~~
+
+The functions of middleware include
+
+- Initiation of processes at different computers
+- Session management
+- Directory services to allow clients to locate servers
+- remote data access
+- Concurrency control to allow servers to handle multiple clients
+- Security and integrity
+- Monitoring
+- Termination of processes both local and remote
+
+Continuum of Processing
+-------------------------
+
+The Gartner model is based on a breakdown of an application into the components of presentation, application logic and data handling. A finer grained breakdown is 
+
+.. image:: _static/img/continuum.gif
+
+Points of Failure
+------------------
+
+Distributed applications run in a complex environment. This makes them much more prone to failure than standalone applications on a single computer. The points of failure include
+
+- The client side of the application could crash
+- The client system may have h/w problems
+- The client's network card could fail
+- Network contention could cause timeouts
+- There may be network address conflicts
+- Network elements such as routers could fail
+- Transmission errors may lose messages
+- The client and server versions may be incompatable
+- The server's network card could fail
+- The server system may have h/w problems
+- The server s/w may crash
+- The server's database may become corrupted
+
+Applications have to be designed with these possible failures in mind. Any action performed by one component must be recoverable if failure occurs in some other part of the system. Techniques such as transactions and continuous error checking need to be employed to avoid errors.
+
+Acceptance Factors
+--------------------
+
+- Reliability
+- Performance
+- Responsiveness
+- Scalability
+- Capacity
+- Security
+
+Transparency
+---------------
+
+The "holy grails" of distributed systems are to provide the following:
+
+- access transparency
+- location transparency
+- migration transparency
+- replication transparency
+- concurrency transparency
+- scalability transparency
+- performance transparency
+- failure transparency
+
+Eight fallacies of distributed computing
+---------------------------------------------
+
+Sun Microsystems was a company that performed much of the early work in distributed systems, and even had a mantra "The network is the computer." Based on their experience over many years a number of the scientists at Sun came up with the following list of fallacies commonly assumed:
+
+#. The network is reliable.
+#. Latency is zero.
+#. Bandwidth is infinite.
+#. The network is secure.
+#. Topology doesn't change.
+#. There is one administrator.
+#. Transport cost is zero.
+#. The network is homogeneous.
+
+Many of these directly impact on network programming. For example, the design of most remote procedure call systems is based on the premise that the network is reliable so that a remote procedure call will behave in the same way as a local call. The fallacies of zero latency and infinite bandwidth also lead to assumptions about the time duration of an RPC call being the same as a local call, whereas they are magnitudes of order slower.
+
+The recognition of these fallacies led Java's RMI (remote method invocation) model to require every RPC call to potentially throw a RemoteException. This forced programmers to at least recognise the possibility of network error and to remind them that they could not expect the same speeds as local calls.
