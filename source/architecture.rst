@@ -25,7 +25,7 @@ ISO OSI Protocol
 
 Although it was never properly implemented, the OSI (Open Systems Interconnect) protocol has been a major influence in ways of talking about and influencing distributed systems design. It is commonly given in the following figure: 
 
-.. image:: ../static/img/iso.gif
+.. image:: _static/img/iso.gif
 
 OSI layers
 ~~~~~~~~~~~~~~~
@@ -43,7 +43,7 @@ TCP/IP Protocol
 
 While the OSI model was being argued, debated, partly implemented and fought over, the DARPA internet research project was busy building the TCP/IP protocols. These have been immensely succesful and have led to The Internet (with capitals). This is a much simpler stack:
 
-.. image:: ../static/img/tcp_stack.gif 
+.. image:: _static/img/tcp_stack.gif 
 
 Some Alternative Protocols
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,7 +89,7 @@ The communication between layers in either the OSI or the TCP/IP stacks is done 
 
 For example, the TFP (Trivial File Transfer Protocol) moves files from one computer to another. It uses the UDP protocol on top of the IP protocol, which may be sent over Ethernet. This looks like: 
 
-.. image:: ../static/img/packets.gif 
+.. image:: _static/img/packets.gif 
 
 The packet transmitted over ethernet, is of course the bottom one.
 
@@ -123,7 +123,7 @@ Some non-procedural languages are built on the principle of message passing. Con
 
 Message passing is a primitive mechanism for distributed systems. Set up a connection and pump some data down it. At the other end, figure out what the message was and respond to it, possibly sending messages back. This is illustrated by 
 
-.. image:: ../static/img/msg.gif 
+.. image:: _static/img/msg.gif 
 
 Low level event driven systems such as the X Window System function in a somewhat similar way: wait for message from a user (mouse clicks, etc), decode them and act on them.
 
@@ -138,7 +138,7 @@ Even with procedure calls, there are variations. The code may be statically link
 
 DLLs run in the same machine as the calling code. it is a simple (conceptual) step to transfer control to a procedure running in a different machine. The mechanics of this are not so simple! However, this model of control has given rise to the "remote procedure call" (RPC) which is discussed in much detail in a later chapter. This is illustrated by 
 
-.. image:: ../static/img/rpc.gif
+.. image:: _static/img/rpc.gif
 
 There is an historical oddity called the "lightweight remote procedure call" invented by Microsoft as they transitioned from 16-bit to 32-bit applications. A 16-bit application might need to transfer data to a 32-bit application on the same machine. That made it lightweight as there was no networking! But it had many of the other issues of RPC systems in data representations and conversion.
 
@@ -153,5 +153,59 @@ A third model is the so-called filter. Here one component passes information to 
 
 These are illustrated as: 
 
-.. image:: ../static/img/peer.gif
+.. image:: _static/img/peer.gif
 
+Client/Server System
+-----------------------
+
+Another view of a client server system is
+
+.. image:: _static/img/cs-system.gif
+
+Client/Server Application
+----------------------------
+
+And a third view is 
+
+.. image:: _static/img/cs-application.gif
+
+Server Distribution
+-----------------------
+
+A client-server systems need not be simple. The basic model is single client, single server 
+
+.. image:: _static/img/one-one.gif
+
+but you can also have multiple clients, single server 
+
+.. image:: _static/img/many-one.gif
+
+In this, the master receives requests and instead of handling them one at a time itself, passes them off to other servers to handle. This is a common model when concurrent clients are possible.
+
+There are also single client, multiple servers 
+
+.. image:: _static/img/one-many.gif
+
+which occurs frequently when a server needs to act as a client to other servers, such as a business logic server getting information from a database server. And of course, there could be multiple clients with multiple servers.
+
+Component Distribution
+-------------------------
+
+A simple but effective way of decomposing many applications is to consider them as made up of three parts:
+
+- Presentation component
+- Application logic
+- Data access
+
+The presentation component is responsible for interactions with the user, both displaying data and gathering input. it may be a modern GUI interface with buttons, lists, menus, etc, or an older command-line style interface, asking questions and getting answers. The details are not important at this level.
+
+The application logic is responsible for intrepreting the users' responses, for applying business rules, for preparing queries and managing responses from the thir component.
+
+The data access component is responsible for stroing and retrieving data. This will often be through a database, but not necessarily.
+
+Gartner Classification
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Based on this threefold decomposition of applicaitons, Gartner considered how the components might be distributed in a client-server sysem. They came up with five models: 
+
+.. image:: _static/img/gartner.gif
