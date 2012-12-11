@@ -11,7 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
    
-   architecture.rst
+   chapter-arch.rst
+   chapter-golang.rst
 
 
 
