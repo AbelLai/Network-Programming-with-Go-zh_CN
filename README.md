@@ -1,6 +1,6 @@
 Go语言网络编程
 =================================
 
-    Network programming with Go
+    Network Programming with Go
 
-Network-programming-with-Go-zh_CN
+Network-Programming-with-Go-zh_CN
