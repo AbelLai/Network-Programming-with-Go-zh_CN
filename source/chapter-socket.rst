@@ -170,7 +170,7 @@ IP掩码
     
 下面的程序是一个使用了这个的例子：
 
-.. code-block:: golang
+.. code-block:: go
 
     /* Mask
      */
