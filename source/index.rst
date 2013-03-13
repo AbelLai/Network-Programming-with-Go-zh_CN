@@ -9,10 +9,11 @@ Welcome to network-programming-with-go-zh_cn's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    
    chapter-arch.rst
    chapter-golang.rst
+   chapter-socket.rst
 
 
 
